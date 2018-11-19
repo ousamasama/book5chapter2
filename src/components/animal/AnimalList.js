@@ -28,39 +28,56 @@ class AnimalList extends Component {
     //   })
     // }
   }*/
-
-  render() {
+  animalOwners(animal) {
     const ao = this.props.animalsOwned
     const own = this.props.owners
+    const ownerNameArr = []
+
+    ao.forEach(animalOwner => {
+      if(animal.id === animalOwner.animalId) {
+        let petOwnerId = animalOwner.ownerId
+        own.forEach(owner => {
+          if(owner.id === petOwnerId) {
+            ownerNameArr.push(owner.name)
+          }
+        })
+      }
+    })
+    return ` is owned by: ${ownerNameArr.join(" and ")}`
+  }
+
+  render() {
+    // const ao = this.props.animalsOwned
+    // const own = this.props.owners
     const aml = this.props.animals
 
-    function animalInfo(animal) {
-      // link animal to join table object, so we can get owner name(s)
-      let ownerIds;
-      ao.forEach(animalOwned => {
-        if (animalOwned.animalId === animal.id) {
-          ownerIds = animalOwned.ownerId
-        }
-      });
+    // function animalInfo(animal) {
+    //   // link animal to join table object, so we can get owner name(s)
+    //   let ownerIds;
+    //   ao.forEach(animalOwned => {
+    //     if (animalOwned.animalId === animal.id) {
+    //       ownerIds = animalOwned.ownerId
+    //     }
+    //   });
 
-      // filter owner array to identify specific owner(s) of the animal passed in
-      const ownerArray = own.filter(owner => {
-        for (let i = 0; i < ownerIds.length; i++) {
-          if (ownerIds[i] === owner.id) {
-            return owner
-          }
-        }
-      })
+    //   // filter owner array to identify specific owner(s) of the animal passed in
+    //   const ownerArray = own.filter(owner => {
+    //     for (let i = 0; i < ownerIds.length; i++) {
+    //       if (ownerIds[i] === owner.id) {
+    //         return owner
+    //       }
+    //     }
+    //   })
 
-      const nameArr = []
-      ownerArray.forEach(obj => nameArr.push(obj.name))
-      console.log(nameArr)
+    //   const nameArr = []
+    //   ownerArray.forEach(obj => nameArr.push(obj.name))
+    //   console.log(nameArr)
 
-      //return array with each animal index and nested array of owner(s) object(s)
-      return `
-      ... Owner(s):
-      ${nameArr}`
-    }
+    //   //return array with each animal index and nested array of owner(s) object(s)
+    //   return `
+    //   ... Owner(s):
+    //   ${nameArr}`
+    // }
 
     return (
       <section className="animals">
@@ -68,7 +85,7 @@ class AnimalList extends Component {
           aml.map(animal =>
             <div key={animal.id}>
               {animal.name}
-              {animalInfo(animal)}
+              {this.animalOwners(animal)}
             </div>
           )
         }

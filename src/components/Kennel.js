@@ -47,11 +47,20 @@ class Kennel extends Component {
 
   // the correct array is "flat data" and will be the same as future database structures
 
+  // animalsOwned = [
+  //   { id: 1, animalId: 1, ownerId: [1,2] },
+  //   { id: 2, animalId: 2, ownerId: 3 },
+  //   { id: 3, animalId: 3, ownerId: 4 },
+  //   { id: 4, animalId: 4, ownerId: [5,6] },
+  // ]
+
   animalsOwned = [
-    { id: 1, animalId: 1, ownerId: [1, 2] },
-    { id: 2, animalId: 2, ownerId: [3] },
-    { id: 3, animalId: 3, ownerId: [4] },
-    { id: 4, animalId: 4, ownerId: [5, 6] }
+    { id: 1, animalId: 1, ownerId: 1 },
+    { id: 2, animalId: 1, ownerId: 2 },
+    { id: 3, animalId: 2, ownerId: 3 },
+    { id: 4, animalId: 3, ownerId: 4 },
+    { id: 5, animalId: 4, ownerId: 5 },
+    { id: 6, animalId: 4, ownerId: 6 }
   ]
 
   state = {
